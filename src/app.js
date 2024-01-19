@@ -1,6 +1,6 @@
 import express from "express";
 import conectaNaDataBase from "./config/dbConnection.js"
-import livro from "./models/Livro.js";
+import routes from "./routes/index.js";
 
 const conection = await conectaNaDataBase();
 conection.on("error", (erro)=>{
@@ -10,13 +10,8 @@ conection.once("open", ()=> {
     console.log("Conexão realizada com sucesso!")
 })
 
-
 const app = express();
-
-app.get("/", (req, res)=>{
-    res.status(200).send("Curso de Node.js");
-})
-
+routes(app)
 
 
 export default app;
